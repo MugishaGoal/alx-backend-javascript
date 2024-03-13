@@ -5,7 +5,7 @@ function getListStudentIds(array) {
   }
 
   // Use the map function to extract ids from each object in the array
-  return array.map(student => student.id);
+  return array.map((student) => student.id);
 }
 
 export default getListStudentIds;
