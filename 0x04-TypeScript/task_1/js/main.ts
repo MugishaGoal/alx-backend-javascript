@@ -38,3 +38,18 @@ const director1: Director = {
   numberOfReports: 17,
 };
 console.log(director1);
+
+// Define the interface for the printTeacher function
+interface PrintTeacherFunction {
+  (firstName: string, lastName: string): string;
+}
+
+// Implement the printTeacher function
+const printTeacher: PrintTeacherFunction = (firstName, lastName) => {
+  const firstInitial = firstName.charAt(0); // Get the first letter of the firstName
+  return `${firstInitial}. ${lastName}`; // Concatenate the first initial and full lastName
+};
+
+// Example usage
+const fullName = printTeacher("John", "Doe");
+console.log(fullName); // Output: J. Doe
