@@ -1,4 +1,4 @@
-// Define a WeakMap to track the number of times queryAPI is called for each endpoint
+// Define a const instance of WeakMap and name it weakMap
 const weakMap = new WeakMap();
 
 // Export the weakMap constant
