@@ -23,3 +23,18 @@ function createTeacher(firstName: string, lastName: string, location: string, ar
 // Example usage
 const teacher3: Teacher = createTeacher('John', 'Doe', 'London', { contract: false });
 console.log(teacher3);
+
+// Extend the Teacher interface to create the Director interface
+interface Director extends Teacher {
+  numberOfReports: number;
+}
+
+// Example usage
+const director1: Director = {
+  firstName: 'John',
+  lastName: 'Doe',
+  location: 'London',
+  fullTimeEmployee: true,
+  numberOfReports: 17,
+};
+console.log(director1);
