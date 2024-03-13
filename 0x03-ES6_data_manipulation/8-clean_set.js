@@ -8,7 +8,7 @@ function cleanSet(set, startString) {
   }
 
   // Otherwise, append the rest of the string after startString
-  return filteredValues.map(value => value.slice(startString.length)).join('-');
+  return filteredValues.map((value) => value.slice(startString.length)).join('-');
 }
 
 export default cleanSet;
