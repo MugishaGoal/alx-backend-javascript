@@ -1,15 +1,13 @@
-// Display initial message
-process.stdout.write("Welcome to Holberton School, what is your name?\n");
+process.stdout.write('Welcome to Holberton School, what is your name?\n');
 
-// Listen for user input on stdin
-process.stdin.once('data', (input) => {
-    // Remove newline character from input and display user's name
-    const name = input.toString().trim();
-    process.stdout.write(`Your name is: ${name}\n`);
+process.stdin.on('readable', () => {
+  const name = process.stdin.read();
 
-    // Display closing message
-    process.stdout.write("This important software is now closing\n");
+  if (name) {
+    process.stdout.write(`Your name is: ${name}`);
+  }
+});
 
-    // Exit the program
-    process.exit(0);
+process.stdin.on('end', () => {
+  process.stdout.write('This important software is now closing\n');
 });
