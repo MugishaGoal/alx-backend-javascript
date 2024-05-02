@@ -7,12 +7,12 @@ const app = http.createServer();
 const DB_FILE = process.argv.length > 2 ? process.argv[2] : '';
 
 // Counts the students in a CSV data file
-const countStudents = (dataPath) => new Promise((resolve, reject) => {
-  if (!dataPath) {
+const countStudents = (Path) => new Promise((resolve, reject) => {
+  if (!Path) {
     reject(new Error('Cannot load the database'));
   }
-  if (dataPath) {
-    fs.readFile(dataPath, (err, data) => {
+  if (Path) {
+    fs.readFile(Path, (err, data) => {
       if (err) {
         reject(new Error('Cannot load the database'));
       }
