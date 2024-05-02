@@ -1,22 +1,22 @@
 // Import the 'fs' module for file system operations
 const fs = require ('fs');
 
-// Define a function named countStudents that takes a 'Path' argument
-const countStudents = (Path) => {
+// Define a function named countStudents that takes a 'dataPath' argument
+const countStudents = (dataPath) => {
   // Check if the specified file path exists
-  if (!fs.existsSync(Path)) {
+  if (!fs.existsSync(dataPath)) {
     // If the file does not exist, throw an error
     throw new Error('Cannot load the database');
   }
   
   // Check if the specified path corresponds to a file
-  if (!fs.statSync(Path).isFile()) {
+  if (!fs.statSync(dataPath).isFile()) {
     // If the path does not correspond to a file, throw an error
     throw new Error('Cannot load the database');
   }
   
   // Read the content of the file synchronously, decode it as UTF-8, trim any whitespace, and split it into lines
-  const fileLines = fs.readFileSync(Path, 'utf-8').toString('utf-8').trim().split('\n');
+  const fileLines = fs.readFileSync(dataPath, 'utf-8').toString('utf-8').trim().split('\n');
   
   // Initialize an empty object to store student groups
   const studentGroups = {};
@@ -25,16 +25,16 @@ const countStudents = (Path) => {
   const dbFieldNames = fileLines[0].split(',');
   
   // Extract property names from the field names
-  const studentNames = dbFieldNames.slice(0, dbFieldNames.length - 1);
+  const studentPropNames = dbFieldNames.slice(0, dbFieldNames.length - 1);
 
   // Iterate over each line of the file (excluding the header)
   for (const line of fileLines.slice(1)) {
     // Split each line into an array of student properties
-    const studentArray = line.split(',');
+    const studentRecord = line.split(',');
     
     // Extract student property values and the field
-    const studentValues = studentArray.slice(0, studentArray.length - 1);
-    const field = studentArray[studentArray.length - 1];
+    const studentPropValues = studentRecord.slice(0, studentRecord.length - 1);
+    const field = studentRecord[studentRecord.length - 1];
     
     // If the field does not exist in studentGroups, create an empty array
     if (!Object.keys(studentGroups).includes(field)) {
@@ -42,7 +42,7 @@ const countStudents = (Path) => {
     }
     
     // Map each property name to its corresponding value and create an object
-    const studentEntries = studentNames.map((Name, idx) => [Name, studentValues[idx]]);
+    const studentEntries = studentPropNames.map((propName, idx) => [propName, studentPropValues[idx]]);
     
     // Push the student object into the corresponding field array
     studentGroups[field].push(Object.fromEntries(studentEntries));
