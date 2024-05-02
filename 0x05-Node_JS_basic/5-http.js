@@ -21,14 +21,14 @@ const countStudents = (Path) => new Promise((resolve, reject) => {
         const fileLines = data.toString('utf-8').trim().split('\n');
         const studentGroups = {};
         const dbFieldNames = fileLines[0].split(',');
-        const studentPropNames = dbFieldNames.slice(
+        const studentNames = dbFieldNames.slice(
           0,
           dbFieldNames.length - 1,
         );
 
         for (const line of fileLines.slice(1)) {
           const studentRecord = line.split(',');
-          const studentPropValues = studentRecord.slice(
+          const studentValues = studentRecord.slice(
             0,
             studentRecord.length - 1,
           );
@@ -36,9 +36,9 @@ const countStudents = (Path) => new Promise((resolve, reject) => {
           if (!Object.keys(studentGroups).includes(field)) {
             studentGroups[field] = [];
           }
-          const studentEntries = studentPropNames.map((propName, idx) => [
-            propName,
-            studentPropValues[idx],
+          const studentEntries = studentNames.map((Name, idx) => [
+            Name,
+            studentValues[idx],
           ]);
           studentGroups[field].push(Object.fromEntries(studentEntries));
         }
